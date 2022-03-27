@@ -27,4 +27,5 @@ Implement a singly linked list:
 
 - implement your linked list as a generic class that can store any type of object
 - Add a reverse method
-- Add a slice method that returns a copy of a subset of the element of the list (eg slice(2,8) returns a new linked list containing elements #2,3,4,5,6,7 -- but not 8)
+- Add a slice method that returns a copy of a subset of the element of the list (eg slice(2,8) returns a new linked list containing 
+- elements #2,3,4,5,6,7 -- but not 8)

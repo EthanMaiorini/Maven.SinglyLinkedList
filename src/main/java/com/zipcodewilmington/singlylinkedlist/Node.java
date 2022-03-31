@@ -1,17 +1,17 @@
 package com.zipcodewilmington.singlylinkedlist;
 
-public class Node <elementType extends Object>{
+public class Node {
     Node next = null;
-    elementType value = null;
-    int index;
+    Integer value = null;
 
-    public Node(elementType e){
-           this.value =e;
+    public Node(Integer e){
+           this.value = e;
            this.next = null;
 
     }
 
     public Node(){
+        this.next = null;
     }
 
 }

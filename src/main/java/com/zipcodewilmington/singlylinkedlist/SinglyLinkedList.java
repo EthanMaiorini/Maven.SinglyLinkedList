@@ -3,71 +3,65 @@ package com.zipcodewilmington.singlylinkedlist;
 /**
  * Created by leon on 1/10/18.
  */
-public class SinglyLinkedList<elementType extends Object> {
+public class SinglyLinkedList{
     private Integer size = 0;
     Node head;
-    void SinglyLinkedList(){
-        Node head = new Node();
-        head.index = 0;
+
+    public SinglyLinkedList(){
+        head = new Node();
         size++;
     }
 
-    void SinglyLinkedList(elementType e){
-        Node head = new Node(e);
-        head.index =0;
+    public SinglyLinkedList(Integer e){
+        head = new Node(e);
+        size++;
     }
 
-    public void add(elementType e){
+    public Integer add(Integer e){
         Node node;
         if(head.next == null) {
             node = new Node(e);
             head.next = node;
-            node.index = head.index+1;
             node.next = null;
         }
         else{node = head.next;
             while(node.next != null)
                 node = node.next;
             node.next = new Node(e);
-            node.next.index = node.index+1;
             node.next.next = null;
         }
         size++;
+        return size;
     }
 
     public boolean remove(int index){
         Node node;
+        int iterate =0;
         Node lastNode = null;
         if (index >= size)
             return false;
         if(index == 0){
             head = head.next;
-            resetIndex(head,index);
         }
         node = head.next;
-        while(node.index != index){
+        lastNode = head;
+        iterate++;
+        while(iterate != index){
             lastNode = node;
             node = node.next;
+            iterate++;
         }
         lastNode.next = node.next;
-        resetIndex(lastNode,index);
+//        resetIndex(lastNode,index);
         size--;
         return true;
-    }
-
-    public void resetIndex(Node node,int index){
-        while(index < size){
-            node.index = index;
-            node = node.next;
-            index++;
-        }
     }
 
     public Integer size(){
         return size;
     }
 
-    Boolean contains(elementType e){
+    public Boolean contains(Integer e){
         Node node;
         if(head.value.equals(e))
             return true;
@@ -80,41 +74,44 @@ public class SinglyLinkedList<elementType extends Object> {
         return false;
     }
 
-    Integer find(elementType e){
+    public Integer find(Integer e){
         Node node;
+        int index =0;
         if(head.value.equals(e))
-            return head.index;
+            return index;
         node = head.next;
+        index++;
         while(node != null) {
             if (node.value.equals(e))
-                return node.index;
+                return index;
             node = node.next;
+            index++;
         }
         return -1;
     }
 
-    elementType get(Integer index){
+    public Integer get(Integer index){
+        int iterate = 0;
         if(index >= size)
             return null;
         if(index == 0)
-            return (elementType)head.value;
+            return head.value;
         Node node = head.next;
-        while(node.index != index)
+        while(iterate != index) {
             node = node.next;
-
-        return (elementType)node.value;
+            iterate++;
+        }
+        return node.value;
     }
 
-    SinglyLinkedList copy(){
+    public SinglyLinkedList copy(){
         Node node,newNode = null;
         SinglyLinkedList newLinked = new SinglyLinkedList();
          newLinked.head.value = head.value;
-         newLinked.head.index = 0;
          node = head.next;
          newLinked.head.next = newNode;
          while(node.next != null){
              newNode.value = node.value;
-             newNode.index = node.index;
              newNode.next = node.next;
              newNode = newNode.next;
              node = node.next;
@@ -123,36 +120,28 @@ public class SinglyLinkedList<elementType extends Object> {
          return newLinked;
     }
 
-    SinglyLinkedList sort(){
+    public SinglyLinkedList sort(){
+        SinglyLinkedList s = new SinglyLinkedList();
         int length = size-1;
-        Node lastNode,thisNode,nextNode;
+        Node thisNode = null,nextNode = null;
+        Node tempNode = null;
+        thisNode = head;
+        nextNode = head.next;
         for(int i =0;i<length;i++) {
-            for (int y = 0; y < length- i; y++) {
-                if (( != null)&&(this.students[y+1] != null)) {
-                    if ((this.students[y].getAverageExamScore()) < (this.students[y + 1].getAverageExamScore())) {
-                        this.students = switchArr(this.students, y);
-                    } else if (this.students[y].getAverageExamScore() == this.students[y + 1].getAverageExamScore()) {
-                        if ((lexographicalIsEqual(this.students[y].getLastName(), this.students[y + 1].getLastName())) == 1) {
-                            this.students = switchArr(this.students, y);
-                        } else if ((lexographicalIsEqual(this.students[y].getLastName(), this.students[y + 1].getLastName())) == -1) {
-                            if ((lexographicalIsEqual(this.students[y].getFirstName(), this.students[y + 1].getFirstName())) == 1) {
-                                this.students = switchArr(this.students, y);
-                            }
-                        }
-                    }
-                }else if (students[y] == null) removeStudent(students[y].getFirstName(),students[y].getLastName());
-                else if(students[y+1] == null) removeStudent(students[y+1].getFirstName(),students[y+1].getLastName());
+            for (int y = 0; y < length - i; y++) {
+                if (thisNode.value > nextNode.value) {
+                    tempNode.value = thisNode.value;
+                    thisNode.value = nextNode.value;
+                    nextNode.value = tempNode.value;
+                }
+                thisNode = nextNode;
+                nextNode = thisNode.next;
             }
+            thisNode = head;
+            nextNode = thisNode.next;
         }
-        return this.students;
-    }
-
-    public Node switchArr(Student[]students,int value){
-
-        Student temp = students[value];
-        students[value] = students[value + 1];
-        students[value + 1] = temp;
-        return  students;
-    }
+           s.head = head;
+        return s;
+        }
 
 }

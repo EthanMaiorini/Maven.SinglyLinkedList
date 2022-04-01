@@ -120,11 +120,13 @@ public class SinglyLinkedList{
     public SinglyLinkedList sort(){
         SinglyLinkedList s = new SinglyLinkedList();
         Node thisNode = null,nextNode = null;
-        Node tempNode = null;
+        Node tempNode = head;
         thisNode = head;
         nextNode = head.next;
         for(int i =0;i<size-1;i++) {
             for (int y = 0; y < size - i; y++) {
+                if(nextNode == null)
+                    break;
                 if (thisNode.value > nextNode.value) {
                     tempNode.value = thisNode.value;
                     thisNode.value = nextNode.value;

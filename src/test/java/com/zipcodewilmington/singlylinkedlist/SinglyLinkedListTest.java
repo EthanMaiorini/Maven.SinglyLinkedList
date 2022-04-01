@@ -157,4 +157,39 @@ public class SinglyLinkedListTest {
         //then
         Assert.assertEquals(30,actual);
     }
+
+    @org.junit.jupiter.api.Test
+    void sort2() {
+        //given
+        int value = 10;
+        SinglyLinkedList s = new SinglyLinkedList(value);
+        //when
+        s.add(30);
+        s.add(25);
+        s.add(10);
+        s.add(1);
+        s.add(20);
+        s.sort();
+        int actual = s.get(5);
+        //then
+        Assert.assertEquals(30,actual);
+    }
+
+    @org.junit.jupiter.api.Test
+    void sort3() {
+        //given
+        int value = 10;
+        SinglyLinkedList s = new SinglyLinkedList(value);
+        //when
+        s.add(30);
+        s.add(25);
+        s.add(10);
+        s.add(1);
+        s.add(20);
+        s.sort();
+        int actual = s.get(0);
+        //then
+        Assert.assertEquals(1,actual);
+    }
+
 }

@@ -97,6 +97,7 @@ public class SinglyLinkedList{
         if(index == 0)
             return head.value;
         Node node = head.next;
+        iterate++;
         while(iterate != index) {
             node = node.next;
             iterate++;
@@ -105,30 +106,25 @@ public class SinglyLinkedList{
     }
 
     public SinglyLinkedList copy(){
-        Node node,newNode = null;
-        SinglyLinkedList newLinked = new SinglyLinkedList();
-         newLinked.head.value = head.value;
+        Node node;
+        SinglyLinkedList newLinked = new SinglyLinkedList(head.value);
          node = head.next;
-         newLinked.head.next = newNode;
          while(node.next != null){
-             newNode.value = node.value;
-             newNode.next = node.next;
-             newNode = newNode.next;
-             node = node.next;
+            newLinked.add(node.value);
+            node = node.next;
          }
-        newNode.value = node.value;
+        newLinked.add(node.value);
          return newLinked;
     }
 
     public SinglyLinkedList sort(){
         SinglyLinkedList s = new SinglyLinkedList();
-        int length = size-1;
         Node thisNode = null,nextNode = null;
         Node tempNode = null;
         thisNode = head;
         nextNode = head.next;
-        for(int i =0;i<length;i++) {
-            for (int y = 0; y < length - i; y++) {
+        for(int i =0;i<size-1;i++) {
+            for (int y = 0; y < size - i; y++) {
                 if (thisNode.value > nextNode.value) {
                     tempNode.value = thisNode.value;
                     thisNode.value = nextNode.value;

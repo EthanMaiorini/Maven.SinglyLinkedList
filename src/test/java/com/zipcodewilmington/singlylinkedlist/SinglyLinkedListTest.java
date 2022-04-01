@@ -74,25 +74,87 @@ public class SinglyLinkedListTest {
         //when
         s.add(25);
         s.add(30);
-        int actual = s.size();
+        boolean actual = s.contains(30);
         //then
-        Assert.assertEquals(3,actual);
+        Assert.assertTrue(actual);
     }
 
     @org.junit.jupiter.api.Test
-    void find() {
+    void contains2() {
+        //given
+        int value = 10;
+        SinglyLinkedList s = new SinglyLinkedList(value);
+        //when
+        s.add(25);
+        s.add(30);
+        boolean actual = s.contains(35);
+        //then
+        Assert.assertFalse(actual);
+    }
 
+    @org.junit.jupiter.api.Test
+    void findTest() {
+        //given
+        int value = 10;
+        SinglyLinkedList s = new SinglyLinkedList(value);
+        //when
+        s.add(25);
+        s.add(30);
+        int actual = s.find(30);
+        //then
+        Assert.assertEquals(2,actual);
+    }
+
+    @org.junit.jupiter.api.Test
+    void findTest2() {
+        //given
+        int value = 10;
+        SinglyLinkedList s = new SinglyLinkedList(value);
+        //when
+        s.add(25);
+        s.add(30);
+        int actual = s.find(35);
+        //then
+        Assert.assertEquals(-1,actual);
     }
 
     @org.junit.jupiter.api.Test
     void get() {
+        //given
+        int value = 10;
+        SinglyLinkedList s = new SinglyLinkedList(value);
+        //when
+        s.add(25);
+        s.add(30);
+        int actual = s.get(2);
+        //then
+        Assert.assertEquals(30,actual);
     }
 
     @org.junit.jupiter.api.Test
     void copy() {
+        //given
+        int value = 10;
+        SinglyLinkedList s = new SinglyLinkedList(value);
+        //when
+        s.add(25);
+        s.add(30);
+        SinglyLinkedList actual = s.copy();
+        //then
+        Assert.assertEquals(s.get(2),actual.get(2));
     }
 
     @org.junit.jupiter.api.Test
     void sort() {
+        //given
+        int value = 10;
+        SinglyLinkedList s = new SinglyLinkedList(value);
+        //when
+        s.add(30);
+        s.add(25);
+        s.sort();
+        int actual = s.get(2);
+        //then
+        Assert.assertEquals(30,actual);
     }
 }
